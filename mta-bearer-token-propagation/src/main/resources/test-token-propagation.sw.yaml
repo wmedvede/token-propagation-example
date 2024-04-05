@@ -1,0 +1,18 @@
+specVersion: "0.8"
+id: test-token-propagation
+version: "1.0"
+name: Testing workflow with Bearer token and Bearer token propagation
+start: GetTrackers
+functions:
+  - name: getTrackers
+    type: rest
+    operation: specs/mta.json#getTrackers
+states:
+  - name: GetTrackers
+    type: operation
+    actions:
+      - name: CallGetTrackers
+        functionRef: getTrackers
+        actionDataFilter:
+          toStateData: ".trackers"
+    end: true
